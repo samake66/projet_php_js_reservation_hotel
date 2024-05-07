@@ -34,6 +34,10 @@ $query="SELECT * FROM type ";
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <?php
       if(isset($_SESSION['login'])){ ?>
+        <p><i class="fa-solid fa-basket-shopping-simple"></i></p>
+        <button class="btn btn-outline-info"  type="button">
+          <a href="panier.php"><p>panier</p></a>
+        </button>
         <button class="btn btn-outline-info"  type="button">
           <a href="deconnexion.php">Deconnexion</a>
         </button>

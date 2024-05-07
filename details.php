@@ -49,5 +49,5 @@ foreach($images as $image){ ?>
     <p>Situé dans le 12ème arrondissement de Paris, le Grand Hotel Dore comporte une réception ouverte 24h/24.<br> Il vous accueille à 1,4 km de la salle AccorHotels Arena, à 2 km de la gare de Lyon et à 15 minutes à pied de la place de la Bastille.<br> La connexion Wi-Fi est disponible gratuitement.</p>
     <p class="card-text">(superficie: <?=$chambre['superficie'] ?> m2, prix: <?=$chambre['prix'] ?> $)</p>
     <p class="card-text">(Nombre d'enfant autorisé: <?=$chambre['nombre_enfant'] ?> , Nombre d'adulte autorisé: <?=$chambre['nombre_adulte'] ?> )</p>
-    <a href="reservation.php?id=<?=$id_chambre?>&amp;date_debut=<?=$date_debut?>&amp;date_fin=<?=$date_fin?>" class="btn btn-primary" >reserver</a>
+    <a href="panier.php?id=<?=$id_chambre?>&amp;date_debut=<?=$date_debut?>&amp;date_fin=<?=$date_fin?>" class="btn btn-primary" >ajouter au panier</a>
 </div>

@@ -1,12 +1,11 @@
 <?php
 
 include "header.php";
-
 $ville=$_POST['ville'];
-$val_search=$_POST['search'];
 $date_debut=$_POST['date_debut'];
 $date_fin=$_POST['date_fin'];
 $type=$_POST['type'];
+
 
 
 //if(isset($val_search) && !empty(trim($ville))){
@@ -79,7 +78,6 @@ $type=$_POST['type'];
             $hotel=$statement1->fetch(PDO::FETCH_ASSOC);
             $type=$statement2->fetch(PDO::FETCH_ASSOC);
             $image=$statement3->fetch(PDO::FETCH_ASSOC);
-            echo "ici";
             ?>
           
           <div class="col">
