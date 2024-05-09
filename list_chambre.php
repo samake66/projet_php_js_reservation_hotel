@@ -2,7 +2,7 @@
 
 include "header.php";
 
-$email=$_SESSION['login'];
+@$email=$_SESSION['login'];
 
   //requette
   $query="SELECT * FROM chambre";
@@ -43,6 +43,12 @@ $email=$_SESSION['login'];
           <h4>chambre <?=$list_chambre['name']?> de type: <?=$type['name']?></h4>
           <p class="card-text">(superficie: <?=$list_chambre['superficie'] ?>, prix: <?=$list_chambre['prix'] ?> $)</p>
           <a href="details.php?id=<?=$list_chambre['idchambre']?>" class="btn btn-primary" >voir l'ofrre</a>
+          <?php
+          if(isset($_SESSION['login_admin'])){ ?>
+            <a href="supprimer_chambre.php?id=<?=$list_chambre['idchambre']?>" class="btn btn-primary">Supprimer</a>
+
+        <?php
+        } ?>
         </div>
       </div>
         <?php

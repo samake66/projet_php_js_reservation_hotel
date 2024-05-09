@@ -32,7 +32,15 @@ $hotels = $statement->fetchAll(PDO::FETCH_ASSOC);
         <div class="card-body">
           <p class="card-text"><?=$hotel['adresse']?></p>
           <a href="nos_chambre.php?id=<?=$hotel['idhotel']?>" class="btn btn-primary" >Voir nos chambres</a>
+            <?php
+          if(isset($_SESSION['login_admin'])){ ?>
+              <a href="supprimer_hotel.php?id=<?=$hotel['idhotel']?>" class="btn btn-primary">Supprimer</a>
+
+          <?php
+          } ?>
         </div>
+
+          
       </div>
         <?php
         } ?>

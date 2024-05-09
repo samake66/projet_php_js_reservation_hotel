@@ -3,9 +3,11 @@
 include 'header.php';
 
 $id_chambre=$_GET['id'];
-$date_debut=$_GET['date_debut'];
-$date_fin=$_GET['date_fin'];
+@$date_debut=$_GET['date_debut'];
+@$date_fin=$_GET['date_fin'];
 
+$_SESSION['panier'][$id_chambre]=['idchambre'=>$id_chambre, 'datedebut'=>$date_debut, 'datefin'=>$date_fin];
+  
 $query="SELECT * FROM chambre WHERE idchambre=:id_chambre";
 $statement=$pdo->prepare($query);
 $statement->bindValue(':id_chambre', $id_chambre, \PDO::PARAM_INT);

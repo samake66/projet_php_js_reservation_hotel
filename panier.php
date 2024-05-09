@@ -6,28 +6,22 @@ session_start();
 <h1>votre panier:<?=$_SESSION['login']?></h1>
 <?php
 
-if(!isset($_SESSION['panier'])){
 
-  echo "votre panier est vide";
-}
-
-else{
+if(isset($_SESSION['panier'])){
   @$id_chambre=$_GET['id'];
-  foreach($_SESSION['panier'] as $keys=>$paniers){
-    if(in_array($id_chambre, $paniers)){
-      echo "cette chambre est déjà dans le votre panier <br><hr> Merci de choisir une autre"; 
-      exit();
-    }
-  }
+  echo $id_chambre;
   @$date_debut=$_GET['date_debut'];
   @$date_fin=$_GET['date_fin'];
-  $_SESSION['panier'][]=['idchambre'=>$id_chambre, 'datedebut'=>$date_debut, 'datefin'=>$date_fin];
-  
-  
 
-    var_dump($_SESSION);
+  
+    if(in_array($id_chambre, $_SESSION['panier'])){
+      var_dump($paniers);
+      echo "cette chambre est déjà dans votre panier <br><hr> Merci de choisir une autre"; 
+      exit();
+    }
+    
     foreach($_SESSION['panier'] as $keys=>$paniers){
-
+      
       //foreach($paniers as $panier){
       $id_chambre=$paniers['idchambre'];
       $date_debut=$paniers['datedebut'];
@@ -50,9 +44,9 @@ else{
 
 
       //verification si le même client n'a pas une reservation encours de la même chambre
-      $query="SELECT * FROM reservation WHERE chambre_idchambre= '$id_chambre' AND client_idclient='$id_client'";
+      /*$query="SELECT * FROM reservation WHERE chambre_idchambre= '$id_chambre' AND client_idclient='$id_client'";
       $statement=$pdo->query($query);
-      $reservations=$statement->fetchAll();
+      $reservations=$statement->fetchAll();*/
 
       //requette nom de hotel
       $id_hotel=$chambre['hotel_idhotel'];
@@ -81,6 +75,7 @@ else{
         <div class="card-body">
           <h4>chambre <?=$chambre['name']?> de type: <?=$type['name']?></h4>
           <p class="card-text">(superficie: <?=$chambre['superficie'] ?>, prix: <?=$chambre['prix'] ?> $)</p>
+          <p class="card-text">Réservation: du <?=$date_debut?> au <?=$date_fin ?> </p>
           <a href="supprimer.php?id=<?=$keys?>" class="btn btn-primary" >supprimer</a>
         </div>
       </div>
@@ -96,4 +91,8 @@ else{
       <a href="vider_panier.php" class="btn btn-primary" >vider mon panier</a>
       </div>
 <?php
+}
+else{
+  
+  echo "votre panier est vide";
 }

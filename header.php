@@ -33,11 +33,33 @@ $query="SELECT * FROM type ";
       </ul> 
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <?php
-      if(isset($_SESSION['login'])){ ?>
+      if(isset($_SESSION['login_admin'])){ ?>
+      <button class="btn btn-outline-info"  type="button">
+          <a href="ajout_hotel.php?email=<?= $_SESSION['login_admin']?>"><p>Ajouter un hôtel</p></a>
+        </button>
+        <p><i class="fa-solid fa-basket-shopping-simple"></i></p>
+        <button class="btn btn-outline-info"  type="button">
+        <a href="ajout_chambre.php?email=<?= $_SESSION['login_admin']?>"><p>Ajouter une chambre</p></a>
+        </button>
+        <button class="btn btn-outline-info"  type="button">
+          <a href="deconnexion.php">Deconnexion</a>
+        </button>
+        <div>
+          
+          <p><i class="fa-solid fa-user"></i>Admin:<br><?= $_SESSION['login_admin']?></p>
+        </div>
+      <?php
+      }
+      elseif(isset($_SESSION['login'])){ ?>
+      <button class="btn btn-outline-info"  type="button">
+          <a href="mes_reservation.php?email=<?= $_SESSION['login']?>"><p>mes réservations</p></a>
+        </button>
+        <div>
         <p><i class="fa-solid fa-basket-shopping-simple"></i></p>
         <button class="btn btn-outline-info"  type="button">
           <a href="panier.php"><p>panier</p></a>
         </button>
+        </div>
         <button class="btn btn-outline-info"  type="button">
           <a href="deconnexion.php">Deconnexion</a>
         </button>
@@ -70,18 +92,21 @@ $query="SELECT * FROM type ";
 <form class="row gx-3 gy-2 align-items-center" id="myForm" role="search" action="recherche.php" method="post">
   <div class="col-sm-3">
     <label class="visually-hidden" for="specificSizeInputName">Ville</label>
-    <input type="search" required="required" name="ville"  class="form-control" id="specificSizeInputName" placeholder="Ville ou code postal">
+    <input type="search" required="required" name="ville" value="<?=@$ville?>"  class="form-control" id="specificSizeInputName" placeholder="Ville ou code postal">
   </div>
   <div class="col-sm-3">
     <label class="visually-hidden" for="specificSizeInputGroupUsername">date debut</label>
     <div class="input-group">
-      <input type="date" name="date_debut" required="required" class="form-control" id="specificSizeInputGroupUsername" placeholder="Username">
+    <?php
+      $date_min=date("Y-m-d");
+    ?>
+      <input type="date" name="date_debut" min="<?=$date_min?>"  value="<?=@$date_debut?>" required="required" class="form-control" id="specificSizeInputGroupUsername" placeholder="Username">
     </div>
   </div>
   <div class="col-sm-3">
     <label class="visually-hidden" for="specificSizeInputGroupUsername">date fin</label>
     <div class="input-group">
-      <input type="date" name="date_fin" required="required" class="form-control" id="specificSizeInputGroupUsername" placeholder="Username">
+      <input type="date" name="date_fin" min="<?=$date_min?>"  value="<?=@$date_fin?>" required="required" class="form-control" id="specificSizeInputGroupUsername" placeholder="Username">
     </div>
   </div>
   <div class="col-sm-3">
