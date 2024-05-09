@@ -16,6 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `admin`
+--
+
+DROP TABLE IF EXISTS `admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `admin` (
+  `idadmin` int unsigned NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  PRIMARY KEY (`idadmin`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admin`
+--
+
+LOCK TABLES `admin` WRITE;
+/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` VALUES (1,'Moha','moha@gmail.com','moh2000'),(2,'Yaya','yaya@gmail.com','yaya2001'),(3,'Michael','michael@gmail;com','mic2024');
+/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `chambre`
 --
 
@@ -32,6 +58,7 @@ CREATE TABLE `chambre` (
   `nombre_adulte` int DEFAULT NULL,
   `nombre_enfant` int DEFAULT NULL,
   `type_idtype` int NOT NULL,
+  `reservable` tinyint NOT NULL,
   PRIMARY KEY (`idchambre`,`hotel_idhotel`,`image_idimage`,`type_idtype`),
   KEY `fk_chambre_hotel_idx` (`hotel_idhotel`),
   KEY `fk_chambre_type1_idx` (`type_idtype`),
@@ -46,7 +73,7 @@ CREATE TABLE `chambre` (
 
 LOCK TABLES `chambre` WRITE;
 /*!40000 ALTER TABLE `chambre` DISABLE KEYS */;
-INSERT INTO `chambre` VALUES (1,'c1',18,1,1,235,1,0,1),(2,'c2',25,1,2,135,2,0,2),(3,'c3',35,2,3,400,2,1,3),(4,'A1',25,4,4,350,2,1,3),(5,'R1',30,5,5,530,2,2,4),(6,'R2',45,5,9,700,1,1,4);
+INSERT INTO `chambre` VALUES (1,'c1',18,1,1,235,1,0,1,0),(2,'c2',25,1,2,135,2,0,2,0),(3,'c3',35,2,3,400,2,1,3,0),(4,'A1',25,4,4,350,2,1,3,1),(5,'R1',30,5,5,530,2,2,4,1),(6,'R2',45,5,9,700,1,1,4,0);
 /*!40000 ALTER TABLE `chambre` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -72,7 +99,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES (1,'Moussa','samake@gmail.com','moussa66'),(2,'Kadia','kadia@gmail.com','kadia77'),(3,'Yacou','yacou@gmail.com','yacou83'),(4,'Ovi','ovi@gmail.com','ovi2024'),(5,'Antony','antony@gmail.com','antony'),(6,'Chris','chris@gmail.com','chris2024'),(7,'Chris','chris@gmail.com','chris2024'),(8,'Chris','chris@gmail.com','chris2024'),(9,'Chris','chris@gmail.com','chris2024'),(10,'Lore','lore@gmail.com','lore2024');
+INSERT INTO `client` VALUES (1,'Moussa','samake@gmail.com','moussa66'),(2,'Kadia','kadia@gmail.com','kadia77'),(3,'Yacou','yacou@gmail.com','yacou83'),(4,'Ovi','ovi@gmail.com','ovi2024'),(5,'Antony','antony@gmail.com','antony'),(6,'Chris','chris@gmail.com','chris2024'),(10,'Lore','lore@gmail.com','lore2024');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -141,12 +168,13 @@ CREATE TABLE `reservation` (
   `client_idclient` int NOT NULL,
   `date_debut` date NOT NULL,
   `date_fin` date NOT NULL,
-  PRIMARY KEY (`chambre_idchambre`,`client_idclient`),
+  `idreservation` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`idreservation`),
   KEY `fk_chambre_has_client_client1_idx` (`client_idclient`),
   KEY `fk_chambre_has_client_chambre1_idx` (`chambre_idchambre`),
   CONSTRAINT `fk_chambre_has_client_chambre1` FOREIGN KEY (`chambre_idchambre`) REFERENCES `chambre` (`idchambre`),
   CONSTRAINT `fk_chambre_has_client_client1` FOREIGN KEY (`client_idclient`) REFERENCES `client` (`idclient`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +183,7 @@ CREATE TABLE `reservation` (
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
-INSERT INTO `reservation` VALUES (1,1,'2024-04-28','2024-05-30'),(1,6,'2024-05-04','2024-05-08'),(2,1,'2024-04-25','2024-05-02'),(3,1,'2024-05-04','2024-05-10'),(3,2,'2024-05-01','2024-05-15');
+INSERT INTO `reservation` VALUES (1,1,'2024-04-28','2024-05-30',1),(1,6,'2024-05-04','2024-05-08',2),(1,10,'2024-05-08','2024-05-30',3),(2,1,'2024-04-25','2024-05-02',4),(2,10,'2024-05-07','2024-05-07',5),(3,1,'2024-05-04','2024-05-10',6),(3,2,'2024-05-01','2024-05-15',7),(3,10,'2024-05-08','2024-05-30',8);
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,4 +220,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-05 22:02:34
+-- Dump completed on 2024-05-09 11:41:53
